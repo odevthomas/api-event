@@ -2,7 +2,10 @@
 
 Esta API foi desenvolvida utilizando **NestJS** para criação de uma aplicação robusta e escalável com o banco de dados **MongoDB**. A API permite o gerenciamento de eventos, possibilitando operações como a criação de um evento através de um sistema **RESTful**.
 
-![Conexão](image.png)
+![image](https://github.com/user-attachments/assets/e3571493-292e-431d-a495-3f3875a16f57)
+
+![image](https://github.com/user-attachments/assets/58d064b9-2353-4d51-a0bd-245847dd633d)
+
 
 ---
 
@@ -53,6 +56,9 @@ Você pode usar uma instância local do MongoDB ou criar uma conta no MongoDB At
 ```typescript
 MongooseModule.forRoot('mongodb+srv://username:password@cluster0.mongodb.net/dbname?retryWrites=true&w=majority')
 ```
+
+![image](https://github.com/user-attachments/assets/cf9bd5fa-0f57-494e-8bcc-d84bb67b0913)
+
 
 ### 4️⃣ Rodar a aplicação:
 Para rodar a aplicação em desenvolvimento:
