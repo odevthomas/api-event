@@ -1,98 +1,192 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# 📌 API de Gerenciamento de Eventos
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+Esta API foi desenvolvida utilizando **NestJS** para criação de uma aplicação robusta e escalável com o banco de dados **MongoDB**. A API permite o gerenciamento de eventos, possibilitando operações como a criação de um evento através de um sistema **RESTful**.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+![Conexão](image.png)
 
-## Description
+---
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## 🚀 Tecnologias Utilizadas
 
-## Project setup
+- **NestJS**: Framework de Node.js para construir aplicações escaláveis e eficientes.
+- **MongoDB**: Banco de dados NoSQL utilizado para armazenar as informações dos eventos.
+- **Mongoose**: ODM (Object Document Mapping) para MongoDB e Node.js.
+- **Postman**: Ferramenta para testar a API através de requisições HTTP.
 
+![Solicitação POST](image-1.png)
+
+---
+
+## ⚡ Funcionalidades
+
+A API oferece as seguintes funcionalidades:
+
+- **Create Event**: Criação de eventos com informações como nome, data, hora, descrição e valor.
+
+---
+
+## 📋 Pré-requisitos
+
+Antes de rodar o projeto, você precisa ter o seguinte instalado:
+
+- **Node.js**: Instalar o [Node.js](https://nodejs.org/).
+- **MongoDB**: Você pode usar uma instância local ou um serviço de MongoDB na nuvem, como o [MongoDB Atlas](https://www.mongodb.com/cloud/atlas).
+
+---
+
+## 📥 Instalação
+
+### 1️⃣ Clone o repositório:
 ```bash
-$ npm install
+git clone https://github.com/seu-usuario/nome-do-repositorio.git
+cd nome-do-repositorio
 ```
 
-## Compile and run the project
-
+### 2️⃣ Instale as dependências:
+Certifique-se de ter o Node.js instalado em sua máquina e depois execute:
 ```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+npm install
 ```
 
-## Run tests
-
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+### 3️⃣ Configuração do MongoDB:
+Você pode usar uma instância local do MongoDB ou criar uma conta no MongoDB Atlas e obter uma URL de conexão. Caso esteja utilizando o MongoDB Atlas, altere a string de conexão em `app.module.ts`:
+```typescript
+MongooseModule.forRoot('mongodb+srv://username:password@cluster0.mongodb.net/dbname?retryWrites=true&w=majority')
 ```
 
-## Deployment
-
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
-
+### 4️⃣ Rodar a aplicação:
+Para rodar a aplicação em desenvolvimento:
 ```bash
-$ npm install -g mau
-$ mau deploy
+npm run start:dev
+```
+A aplicação estará rodando em **http://localhost:3000**.
+
+---
+
+## 🔗 Endpoints da API
+
+### 1️⃣ Criar Evento
+
+- **URL:** `/event/create`
+- **Método:** `POST`
+- **Body (JSON):**
+```json
+{
+  "name": "Festa de Aniversário",
+  "date": "2025-05-15T20:00:00.000Z",
+  "hour": 20,
+  "description": "Uma grande festa para comemorar o aniversário.",
+  "value": 150.50
+}
+```
+- **Resposta de Sucesso:**
+```json
+{
+  "name": "Festa de Aniversário",
+  "date": "2025-05-15T20:00:00.000Z",
+  "hour": 20,
+  "description": "Uma grande festa para comemorar o aniversário.",
+  "value": 150.50
+}
+```
+- **Resposta de Erro (Campos obrigatórios faltando):**
+```json
+{
+  "statusCode": 400,
+  "message": "Event validation failed: name: Path 'name' is required., ...",
+  "error": "Bad Request"
+}
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+---
 
-## Resources
+## 📂 Estrutura do Projeto
 
-Check out a few resources that may come in handy when working with NestJS:
+```
+├── src/
+│   ├── event/
+│   │   ├── controllers/
+│   │   │   └── event.controller.ts
+│   │   ├── interfaces/
+│   │   │   └── iEventEntity.ts
+│   │   ├── repositories/
+│   │   │   └── createEvent.repository.ts
+│   │   ├── services/
+│   │   │   └── create-event.services.ts
+│   │   ├── schemas/
+│   │   │   └── event.schema.ts
+│   │   └── event.module.ts
+│   ├── app.controller.ts
+│   ├── app.module.ts
+│   └── app.service.ts
+└── package.json
+```
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+### 📌 Detalhes de Cada Pasta:
 
-## Support
+- **controllers**: Contém os controladores, responsáveis por manipular as requisições HTTP.
+- **interfaces**: Define as interfaces utilizadas em todo o projeto.
+- **repositories**: Contém os repositórios responsáveis pela interação com o banco de dados.
+- **services**: Contém os serviços, que contêm a lógica de negócios.
+- **schemas**: Define os esquemas do Mongoose, que representam os documentos no banco de dados.
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+---
 
-## Stay in touch
+## 🛠️ Testando a API
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+Use o **Postman** ou qualquer outro cliente HTTP para testar os endpoints da API.
 
-## License
+### Exemplo de requisição:
+- **URL:** `http://localhost:3000/event/create`
+- **Método:** `POST`
+- **Body (com o tipo raw e JSON):**
+```json
+{
+  "name": "Festa de Aniversário",
+  "date": "2025-05-15T20:00:00.000Z",
+  "hour": 20,
+  "description": "Uma grande festa para comemorar o aniversário.",
+  "value": 150.50
+}
+```
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+---
+
+## 🤝 Contribuição
+
+Se você deseja contribuir com o projeto, siga os seguintes passos:
+
+1. Faça um **fork** deste repositório.
+2. Crie uma **branch** para suas modificações:
+   ```bash
+   git checkout -b feature/novos-recursos
+   ```
+3. Faça o **commit** das suas mudanças:
+   ```bash
+   git commit -m 'Adicionando novos recursos'
+   ```
+4. Faça o **push** para a branch:
+   ```bash
+   git push origin feature/novos-recursos
+   ```
+5. Abra uma **pull request**.
+
+---
+
+## 📜 Licença
+
+Este projeto está licenciado sob a **MIT License**.
+
+---
+
+## 📖 Como Usar o Postman para Testar
+
+1. **Abra o Postman**.
+2. Selecione o método **POST** e insira a URL do endpoint: `http://localhost:3000/event/create`.
+3. Na aba **Body**, selecione a opção **raw** e defina o tipo como **JSON**.
+4. Cole o corpo da requisição no formato JSON, como mostrado acima.
+5. Clique em **Send** para enviar a requisição.
+
+---
+
+🔹 **Desenvolvido com ❤️ e NestJS**
