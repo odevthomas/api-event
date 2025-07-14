@@ -1,81 +1,97 @@
+
 # 📌 API de Gerenciamento de Eventos
 
-Esta API foi desenvolvida utilizando **NestJS** para criação de uma aplicação robusta e escalável com o banco de dados **MongoDB**. A API permite o gerenciamento de eventos, possibilitando operações como a criação de um evento através de um sistema **RESTful**.
+Esta aplicação é uma **API RESTful desenvolvida com NestJS e MongoDB**, com o objetivo de simular um sistema funcional de cadastro de eventos — simples, escalável e voltado para fins de aprendizado e prática profissional.
+
+O projeto foi criado para exercitar conceitos de arquitetura limpa, separação de responsabilidades, e integração com banco de dados NoSQL usando **Mongoose**. A ideia é que, mesmo sendo simples, ele siga um padrão real de estrutura de software backend moderno.
+
+---
+
+## 💡 Por que este projeto?
+
+Desenvolver APIs simples com boas práticas é um dos melhores caminhos para se tornar um desenvolvedor backend completo. Esse projeto nasceu com três objetivos:
+
+1. **Aplicar os fundamentos do NestJS na prática**
+2. **Conectar a API com o MongoDB usando Mongoose**
+3. **Criar um sistema simples de criação de eventos com tratamento de erros e validação**
+
+📸 Prints da aplicação rodando:
 
 ![image](https://github.com/user-attachments/assets/e3571493-292e-431d-a495-3f3875a16f57)
-
 ![image](https://github.com/user-attachments/assets/58d064b9-2353-4d51-a0bd-245847dd633d)
-
 
 ---
 
 ## 🚀 Tecnologias Utilizadas
 
-- **NestJS**: Framework de Node.js para construir aplicações escaláveis e eficientes.
-- **MongoDB**: Banco de dados NoSQL utilizado para armazenar as informações dos eventos.
-- **Mongoose**: ODM (Object Document Mapping) para MongoDB e Node.js.
-- **Postman**: Ferramenta para testar a API através de requisições HTTP.
-
-![Solicitação POST](image-1.png)
+- **NestJS** – framework robusto para Node.js com arquitetura modular
+- **MongoDB** – banco de dados NoSQL para armazenar os eventos
+- **Mongoose** – ODM para definir os esquemas e conectar com o banco
+- **Postman** – utilizado para testar os endpoints durante o desenvolvimento
 
 ---
 
-## ⚡ Funcionalidades
+## ⚙️ Funcionalidade Implementada
 
-A API oferece as seguintes funcionalidades:
+- **POST /event/create**  
+  Permite o cadastro de um evento com:
+  - nome
+  - data
+  - hora
+  - descrição
+  - valor
 
-- **Create Event**: Criação de eventos com informações como nome, data, hora, descrição e valor.
+Essa operação realiza validação dos campos e retorna mensagens claras em caso de erro.
 
 ---
 
 ## 📋 Pré-requisitos
 
-Antes de rodar o projeto, você precisa ter o seguinte instalado:
+Antes de iniciar o projeto, você precisa ter instalado:
 
-- **Node.js**: Instalar o [Node.js](https://nodejs.org/).
-- **MongoDB**: Você pode usar uma instância local ou um serviço de MongoDB na nuvem, como o [MongoDB Atlas](https://www.mongodb.com/cloud/atlas).
+- [Node.js](https://nodejs.org/)
+- [MongoDB](https://www.mongodb.com/try/download/community) (local) ou [MongoDB Atlas](https://www.mongodb.com/cloud/atlas)
 
 ---
 
-## 📥 Instalação
+## 📦 Instalação e Execução
 
-### 1️⃣ Clone o repositório:
+1. Clone o repositório:
 ```bash
-git clone https://github.com/seu-usuario/nome-do-repositorio.git
-cd nome-do-repositorio
-```
+git clone https://github.com/seu-usuario/api-eventos.git
+cd api-eventos
+````
 
-### 2️⃣ Instale as dependências:
-Certifique-se de ter o Node.js instalado em sua máquina e depois execute:
+2. Instale as dependências:
+
 ```bash
 npm install
 ```
 
-### 3️⃣ Configuração do MongoDB:
-Você pode usar uma instância local do MongoDB ou criar uma conta no MongoDB Atlas e obter uma URL de conexão. Caso esteja utilizando o MongoDB Atlas, altere a string de conexão em `app.module.ts`:
+3. Configure a conexão com MongoDB no arquivo `app.module.ts`:
+
 ```typescript
-MongooseModule.forRoot('mongodb+srv://username:password@cluster0.mongodb.net/dbname?retryWrites=true&w=majority')
+MongooseModule.forRoot('mongodb+srv://<user>:<password>@cluster.mongodb.net/<dbname>')
 ```
 
-![image](https://github.com/user-attachments/assets/cf9bd5fa-0f57-494e-8bcc-d84bb67b0913)
+4. Execute a aplicação:
 
-
-### 4️⃣ Rodar a aplicação:
-Para rodar a aplicação em desenvolvimento:
 ```bash
 npm run start:dev
 ```
-A aplicação estará rodando em **http://localhost:3000**.
+
+5. Acesse: [http://localhost:3000](http://localhost:3000)
 
 ---
 
-## 🔗 Endpoints da API
+## 📮 Endpoint Implementado
 
-### 1️⃣ Criar Evento
+### ➕ Criar Evento
 
-- **URL:** `/event/create`
-- **Método:** `POST`
-- **Body (JSON):**
+* **Endpoint:** `/event/create`
+* **Método:** `POST`
+* **Body (JSON):**
+
 ```json
 {
   "name": "Festa de Aniversário",
@@ -85,7 +101,9 @@ A aplicação estará rodando em **http://localhost:3000**.
   "value": 150.50
 }
 ```
-- **Resposta de Sucesso:**
+
+* **Resposta de sucesso:**
+
 ```json
 {
   "name": "Festa de Aniversário",
@@ -95,104 +113,94 @@ A aplicação estará rodando em **http://localhost:3000**.
   "value": 150.50
 }
 ```
-- **Resposta de Erro (Campos obrigatórios faltando):**
+
+* **Resposta de erro (exemplo):**
+
 ```json
 {
   "statusCode": 400,
-  "message": "Event validation failed: name: Path 'name' is required., ...",
+  "message": "Event validation failed: name: Path 'name' is required.",
   "error": "Bad Request"
 }
 ```
 
 ---
 
-## 📂 Estrutura do Projeto
+## 🧱 Estrutura de Pastas
 
 ```
-├── src/
-│   ├── event/
-│   │   ├── controllers/
-│   │   │   └── event.controller.ts
-│   │   ├── interfaces/
-│   │   │   └── iEventEntity.ts
-│   │   ├── repositories/
-│   │   │   └── createEvent.repository.ts
-│   │   ├── services/
-│   │   │   └── create-event.services.ts
-│   │   ├── schemas/
-│   │   │   └── event.schema.ts
-│   │   └── event.module.ts
-│   ├── app.controller.ts
-│   ├── app.module.ts
-│   └── app.service.ts
-└── package.json
+src/
+│
+├── event/
+│   ├── controllers/         # Controladores das rotas
+│   ├── interfaces/          # Interface do modelo Event
+│   ├── repositories/        # Camada de acesso ao banco
+│   ├── services/            # Regras de negócio
+│   ├── schemas/             # Schema Mongoose
+│   └── event.module.ts
+│
+├── app.controller.ts
+├── app.module.ts
+└── app.service.ts
 ```
-
-### 📌 Detalhes de Cada Pasta:
-
-- **controllers**: Contém os controladores, responsáveis por manipular as requisições HTTP.
-- **interfaces**: Define as interfaces utilizadas em todo o projeto.
-- **repositories**: Contém os repositórios responsáveis pela interação com o banco de dados.
-- **services**: Contém os serviços, que contêm a lógica de negócios.
-- **schemas**: Define os esquemas do Mongoose, que representam os documentos no banco de dados.
 
 ---
 
-## 🛠️ Testando a API
+## 🧪 Testando com o Postman
 
-Use o **Postman** ou qualquer outro cliente HTTP para testar os endpoints da API.
+1. Abra o **Postman**
+2. Configure uma requisição `POST` para:
+   `http://localhost:3000/event/create`
+3. Vá na aba **Body > raw > JSON**
+4. Insira um corpo como este:
 
-### Exemplo de requisição:
-- **URL:** `http://localhost:3000/event/create`
-- **Método:** `POST`
-- **Body (com o tipo raw e JSON):**
 ```json
 {
-  "name": "Festa de Aniversário",
-  "date": "2025-05-15T20:00:00.000Z",
-  "hour": 20,
-  "description": "Uma grande festa para comemorar o aniversário.",
-  "value": 150.50
+  "name": "Meetup de Tecnologia",
+  "date": "2025-10-01T18:30:00.000Z",
+  "hour": 18,
+  "description": "Evento para networking e palestras.",
+  "value": 0
 }
 ```
 
+5. Envie a requisição e veja a resposta
+
 ---
 
-## 🤝 Contribuição
+## 🙌 Contribuindo
 
-Se você deseja contribuir com o projeto, siga os seguintes passos:
+Contribuições são bem-vindas! Siga os passos:
 
-1. Faça um **fork** deste repositório.
-2. Crie uma **branch** para suas modificações:
-   ```bash
-   git checkout -b feature/novos-recursos
-   ```
-3. Faça o **commit** das suas mudanças:
-   ```bash
-   git commit -m 'Adicionando novos recursos'
-   ```
-4. Faça o **push** para a branch:
-   ```bash
-   git push origin feature/novos-recursos
-   ```
-5. Abra uma **pull request**.
+```bash
+# Fork o repositório
+# Crie uma nova branch
+git checkout -b feature/minha-feature
+
+# Faça commit
+git commit -m 'feat: adicionando nova validação'
+
+# Faça push e abra um pull request
+```
 
 ---
 
 ## 📜 Licença
 
-Este projeto está licenciado sob a **MIT License**.
+Distribuído sob a licença **MIT**.
 
 ---
 
-## 📖 Como Usar o Postman para Testar
+## ✉️ Contato
 
-1. **Abra o Postman**.
-2. Selecione o método **POST** e insira a URL do endpoint: `http://localhost:3000/event/create`.
-3. Na aba **Body**, selecione a opção **raw** e defina o tipo como **JSON**.
-4. Cole o corpo da requisição no formato JSON, como mostrado acima.
-5. Clique em **Send** para enviar a requisição.
+Desenvolvido por **Thomas Eduardo**
+🔗 [thomaseduardo.online](https://thomaseduardo.online)
+📧 [thmedu@outlook.com](mailto:thmedu@outlook.com)
+📱 (19) 9 9904-2072
 
 ---
 
-🔹 **Desenvolvido com ❤️ e NestJS**
+🔧 Projeto criado para fins educacionais, seguindo boas práticas de API com NestJS + MongoDB.
+
+```
+
